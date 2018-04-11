@@ -16,7 +16,7 @@ $(document).ready(function(){
     var uls = document.getElementsByTagName('ul');
     const winMsg = document.createElement('div');
     const winInfo = document.createElement('div');
-    //var hourssLabel = document.getElementById("hours");
+    var counter = 0 ;
     var minutesLabel = document.getElementById("minutes");
     var secondsLabel = document.getElementById("seconds");
     $deck = $('.deck');
@@ -32,8 +32,12 @@ $(document).ready(function(){
     for (let i = 0; i < cards.length; i++) {
         $deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
     }
+    
+     for (let i=0; i<=2 ;i++){
+        uls[0].children[i].firstChild.className = "fa fa-star";
+    }
+    
     clickHandler();
-    //app.timer();
     var timer = setInterval(setTime, 1000);
     window.clearInterval(timer);
     reset();
@@ -51,23 +55,19 @@ $(document).ready(function(){
             cards[i] = cards[random];
             cards[random] = temp;
         }
-       // app.assignCards();
         console.log(cards)
-        //app.assignCards();
     }
 
-    var counter = function () {
-        var counter = 0 ; 
-        return counter += 1 ;
+    function count() {
+        return counter +=1;
     };
-    
     
 
     function reset(){
         totalSecs  = 0;
-        moves.innerHTML = "0";
-        //add();
-    }
+        moves.innerHTML = '0';
+        count();
+    };
    
     restart.addEventListener('click', init);
 
@@ -78,7 +78,7 @@ $(document).ready(function(){
         totalSecs++ ; 
         secondsLabel.innerHTML = convertToStr(totalSecs%60);
         minutesLabel.innerHTML = convertToStr(parseInt(totalSecs/60));
-    }
+    };
 
     function convertToStr (value){
         let valueStr = value + '' ;
@@ -89,7 +89,7 @@ $(document).ready(function(){
         }
     }
 
-    function clickHandler (){
+    function clickHandler (e){
         $('.card').on('click',function(e){
                 if (e.target.id === 'deck' ||
                 e.target.className.includes('open') ||
@@ -110,11 +110,12 @@ $(document).ready(function(){
                     checMatch(this.openCards);
                 }
                 //app.checMatch();
+            //adds counter
+            moves.innerHTML = count();
+            // runs star rating function
+            rating();
         });
-         //adds counter
-        moves.innerHTML = counter;
-        // runs star rating function
-        rating();
+        
                
     }
 
@@ -146,15 +147,22 @@ $(document).ready(function(){
         }
     }
 
-    function rating (){
-        if (moves.innerHTML > 15 && moves.innerHTML <= 25){
-            uls[0].children[0].firstChild.className = "fa fa-star-o"
-        } else if (moves.innerHTML > 30) {
-            uls[0].children[1].firstChild.className = "fa fa-star-o"
-        }
-        else {
+    function checLose(){
+        if (moves.innerHTML > 45){
+            $('.container').html('<h1> U Lose :(</h1>')
         }
     }
+    function rating(){
+        if (moves.innerHTML > 10 && moves.innerHTML <= 20){
+            uls[0].children[0].firstChild.className = "fa fa-star-o";
+        } else if ( moves.innerHTML > 20 && moves.innerHTML <=45) {
+            uls[0].children[1].firstChild.className = "fa fa-star-o";
+        }
+        else  {
+            checLose();
+        }
+    };
+    
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 // function shuffle(array) {
