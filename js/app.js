@@ -56,10 +56,11 @@ $(document).ready(function(){
         //app.assignCards();
     }
 
-    var counter = (function () {
-        var counter = 0;
-        return counter += 1;
-    })();
+    var counter = function () {
+        var counter = 0 ; 
+        return counter += 1 ;
+    };
+    
     
 
     function reset(){
@@ -111,7 +112,7 @@ $(document).ready(function(){
                 //app.checMatch();
         });
          //adds counter
-        moves.innerHTML = counter();
+        moves.innerHTML = counter;
         // runs star rating function
         rating();
                
@@ -125,7 +126,6 @@ $(document).ready(function(){
                         $(this).addClass('match')
                     });
                     $('.card.show.open').each(function(){
-                        $(this).addClass('unmatch');
                         $(this).removeClass('show open');
                     });    
                     checWin();
