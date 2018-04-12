@@ -17,10 +17,11 @@ $(document).ready(function(){
     const winMsg = document.createElement('div');
     const winInfo = document.createElement('div');
     var counter = 0 ;
+    //var moves = 0;
     var minutesLabel = document.getElementById("minutes");
     var secondsLabel = document.getElementById("seconds");
     $deck = $('.deck');
-
+    $moves = $('.moves');
     
     cards = ['diamond','diamond','paper-plane-o','paper-plane-o','anchor','anchor','bolt','bolt','cube','cube','leaf','leaf','bicycle','bicycle','bomb','bomb'];
     
@@ -33,11 +34,15 @@ $(document).ready(function(){
         $deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
     }
     
-     for (let i=0; i<=2 ;i++){
-        uls[0].children[i].firstChild.className = "fa fa-star";
+      for (let i=0; i<=2 ;i++){
+     uls[0].children[i].firstChild.className = "fa fa-star";
     }
+
+    // moves = 0;
+    // $moves.text('0');
     
     clickHandler();
+    
     var timer = setInterval(setTime, 1000);
     window.clearInterval(timer);
     reset();
@@ -65,8 +70,9 @@ $(document).ready(function(){
 
     function reset(){
         totalSecs  = 0;
+        counter = 0;
         moves.innerHTML = '0';
-        count();
+        //count();
     };
    
     restart.addEventListener('click', init);
@@ -97,13 +103,6 @@ $(document).ready(function(){
             ) {
                     return true;
                 } 
-                // opens cards when clicked
-                // if there are two open cards - checks for a match
-                // e.target.className = 'card show open';
-                // this.openCards = document.getElementsByClassName('card show open');
-                // if(this.openCards && this.openCards.length == 2) {
-                //     app.checMatch();
-                // } 
                 $(this).addClass('card show open')
                 this.openCards = document.getElementsByClassName('card show open');
                 if(this.openCards && this.openCards.length >= 2) {
@@ -111,7 +110,9 @@ $(document).ready(function(){
                 }
                 //app.checMatch();
             //adds counter
-            moves.innerHTML = count();
+            // moves++; 
+            // $moves.html(moves);
+            //moves.innerHTML = count();
             // runs star rating function
             rating();
         });
@@ -121,21 +122,23 @@ $(document).ready(function(){
 
     function checMatch (cards){
         let opCards = cards;
-            if ($('.card.show.open ').length>=2){
+            if ($('.card.show.open ').length==2){
+                moves.innerHTML = count();
                 if (opCards&&opCards[0].children[0].className == opCards[1].children[0].className){
                     $('.card.show.open').each(function(){
-                        $(this).addClass('match')
+                        $(this).addClass('match');
                     });
                     $('.card.show.open').each(function(){
                         $(this).removeClass('show open');
                     });    
                     checWin();
                 }else {
+                    $deck.find('.open').addClass('unmatch');
                     setTimeout(function(){
                         $('.card.show.open').each(function(){
                             $(this).removeClass('show open unmatch');
                         }); 
-                    },500);
+                    },400);
                 }
                 
         }
@@ -143,7 +146,8 @@ $(document).ready(function(){
 
     function checWin(){
         if($('.match').length === 16){
-            $('.container').html('<h1>U Win!!!</h1>')
+            winMsg.textContent = "Congratulations! :)";
+            winMsg.textContent = 'You win in ' + moves.innerHTML + ' moves in ' + totalSeconds + ' sec!';
         }
     }
 
