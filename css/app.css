@@ -18,8 +18,8 @@ body {
 
 body {
     background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
-    font-family: 'Tangerine', cursive;
     font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .container {
@@ -33,8 +33,12 @@ h1 {
     font-family: 'Tangerine';
     font-weight: bolder;
     font-size: 65px;
+    font-family: 'Tangerine', cursive;
 }
 
+h4 {
+    display: inline;
+}
 
 /*
  * Styles for the deck of cards
@@ -47,10 +51,10 @@ h1 {
     padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    align-items: center !important;
     margin: 0 0 3em;
 }
 
@@ -62,16 +66,14 @@ h1 {
     color: #ffffff;
     border-radius: 8px;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-    transition: all 0.6 ease;
-    transform-style:preserve-3d; 
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5); 
 }
 
 .deck .card.open {
-    transform: rotateY(180);
+    transform: rotateY(0) !important;
     background: #02b3e4;
     cursor: default;
 }
@@ -104,6 +106,7 @@ h1 {
     margin-bottom: 10px;
     font-size: 26px;
     font-weight: bold;
+    font-family: 'Tangerine', cursive;
 }
 
 .score-panel .stars {
@@ -148,6 +151,7 @@ h1 {
     display: flex;
     background-color: white;
     opacity: 0.8;
+    display: none;
 }
 
 .restartGame {
@@ -167,7 +171,7 @@ footer {
     position: relative;
     clear: both;
     border-radius: 5px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
   }
   
   footer p {

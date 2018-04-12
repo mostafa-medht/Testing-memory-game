@@ -13,8 +13,10 @@ $(document).ready(function(){
     var restart = document.getElementById('restart');
     var moves = document.getElementById("moves");
     var stars = document.getElementById("stars");
+    var star = document.querySelector('.fa-star');
     var uls = document.getElementsByTagName('ul');
     var winMsg = document.createElement('div');
+    var winClass = document.getElementById('winClass');
     const winInfo = document.createElement('div');
     var counter = 0 ;
     var minutesLabel = document.getElementById("minutes");
@@ -46,7 +48,6 @@ $(document).ready(function(){
     reset();
     }
 
-    init ();
 
     function shuffle (cards){
         let random = 0; 
@@ -144,14 +145,21 @@ $(document).ready(function(){
 
     function checWin(){
         if($('.match').length == 2){
-        //$('.winMsg').html('<h2> :D Congratulations !! :)</h2>');    
-        //$('.winMsg').text(`:D Congratulations !! :). You win .In  ${totalSecs}  seconds, you did a total of  ${moves.innerHTML}  moves with a score of  ${$('.fa-star').length}.  Well done!`);;         
-            winMsg.textContent = ' :D Congratulations :) You win .    in ' + moves.innerHTML + ' moves in ' + totalSecs+ ' Secondss ! ';
-            var currentDiv = document.getElementById("container");
-            document.body.insertBefore(winMsg, currentDiv);
-            var refreshHTML = '<div class="restartGame" id="restartGame"><a>Play again</a> </div>';
-            winMsg.insertAdjacentHTML('beforeend', refreshHTML);
-            document.getElementById('restartGame').addEventListener('click', reset);
+        // const h2 =document.createElement('h3');
+        // h2.textContent = ":D Congratulation :) ,You Win ";
+        // winMsg.append(h2);
+        // br
+        // const h4 = document.createElement('h5');
+        // h4.textContent = 'You win in ' + moves.innerHTML + ' moves in ' + totalSecs + ' Sec!' + 'With only ' +star.innerHTML.length +'Stars';
+        // winMsg.append(h4);
+        // var currentDiv = document.getElementById("container");
+        // document.body.insertBefore(winMsg, currentDiv);
+        // winMsg.style.cssText = 'display: inherit;position: absolute;z-index: 2;padding-top: 300px;padding-left: 350px;font-size: 5em;text-align: center;padding-right: 150px;padding-bottom: 300px; list-style-type: none; display: flex';    
+        // $('#winnerText').text(`In ${totalSecs} seconds, you did a total of ${moves.innerHTML} moves with a score of . Well done!`);
+        // $('#winnerModal').model('toggle');
+        $('#winnerText').text(`In ${totalSecs} seconds, you did a total of ${moves.innerHTML} moves with ${$('.fa-star').length} Stars . Well done!`);
+        $('#infoModalLabel').html('<h4> &#9818; &#9787; Congratulation ,You Win ! &#9818; &#9787; <h4>');    
+        $('#winnerModal').modal('toggle');
         }
     }
 
@@ -171,7 +179,7 @@ $(document).ready(function(){
         }
     };
     
-
+init ();
 // Shuffle function from http://stackoverflow.com/a/2450976
 // function shuffle(array) {
 //     var currentIndex = array.length, temporaryValue, randomIndex;
