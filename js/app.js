@@ -14,10 +14,9 @@ $(document).ready(function(){
     var moves = document.getElementById("moves");
     var stars = document.getElementById("stars");
     var uls = document.getElementsByTagName('ul');
-    const winMsg = document.createElement('div');
+    var winMsg = document.createElement('div');
     const winInfo = document.createElement('div');
     var counter = 0 ;
-    //var moves = 0;
     var minutesLabel = document.getElementById("minutes");
     var secondsLabel = document.getElementById("seconds");
     $deck = $('.deck');
@@ -34,12 +33,11 @@ $(document).ready(function(){
         $deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
     }
     
-      for (let i=0; i<=2 ;i++){
+    for (let i=0; i<=2 ;i++){
      uls[0].children[i].firstChild.className = "fa fa-star";
     }
 
-    // moves = 0;
-    // $moves.text('0');
+    winMsg.style.display = 'none';
     
     clickHandler();
     
@@ -72,7 +70,7 @@ $(document).ready(function(){
         totalSecs  = 0;
         counter = 0;
         moves.innerHTML = '0';
-        //count();
+        winMsg.style.display='none';
     };
    
     restart.addEventListener('click', init);
@@ -145,21 +143,27 @@ $(document).ready(function(){
     }
 
     function checWin(){
-        if($('.match').length === 16){
-            winMsg.textContent = "Congratulations! :)";
-            winMsg.textContent = 'You win in ' + moves.innerHTML + ' moves in ' + totalSeconds + ' sec!';
+        if($('.match').length == 2){
+        //$('.winMsg').html('<h2> :D Congratulations !! :)</h2>');    
+        //$('.winMsg').text(`:D Congratulations !! :). You win .In  ${totalSecs}  seconds, you did a total of  ${moves.innerHTML}  moves with a score of  ${$('.fa-star').length}.  Well done!`);;         
+            winMsg.textContent = ' :D Congratulations :) You win .    in ' + moves.innerHTML + ' moves in ' + totalSecs+ ' Secondss ! ';
+            var currentDiv = document.getElementById("container");
+            document.body.insertBefore(winMsg, currentDiv);
+            var refreshHTML = '<div class="restartGame" id="restartGame"><a>Play again</a> </div>';
+            winMsg.insertAdjacentHTML('beforeend', refreshHTML);
+            document.getElementById('restartGame').addEventListener('click', reset);
         }
     }
 
     function checLose(){
-        if (moves.innerHTML > 45){
+        if (moves.innerHTML > 25){
             $('.container').html('<h1> U Lose :(</h1>')
         }
     }
     function rating(){
-        if (moves.innerHTML > 10 && moves.innerHTML <= 20){
+        if (moves.innerHTML > 7 && moves.innerHTML <= 10){
             uls[0].children[0].firstChild.className = "fa fa-star-o";
-        } else if ( moves.innerHTML > 20 && moves.innerHTML <=45) {
+        } else if ( moves.innerHTML > 10 && moves.innerHTML <=25) {
             uls[0].children[1].firstChild.className = "fa fa-star-o";
         }
         else  {
