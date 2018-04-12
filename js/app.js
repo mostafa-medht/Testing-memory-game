@@ -157,24 +157,23 @@ $(document).ready(function(){
         // winMsg.style.cssText = 'display: inherit;position: absolute;z-index: 2;padding-top: 300px;padding-left: 350px;font-size: 5em;text-align: center;padding-right: 150px;padding-bottom: 300px; list-style-type: none; display: flex';    
         // $('#winnerText').text(`In ${totalSecs} seconds, you did a total of ${moves.innerHTML} moves with a score of . Well done!`);
         // $('#winnerModal').model('toggle');
-        $('#myText').text(`In ${totalSecs} seconds, you did a total of ${moves.innerHTML} moves with ${$('.fa-star').length} Stars . Well done!`);
+        $('#myText').text(`In ${totalSecs} seconds, you did a total of ${moves.innerHTML} moves with Scores ${$('.fa-star').length} . Well done!`);
         $('#infoModalLabel').html('<h4> &#9818; &#9787; &#9996; Congratulation ,You Win ! &#9996; &#9818; &#9787; <h4>');    
         $('#myModal').modal('toggle');
         }
     }
 
     function checLose(){
-        if (moves.innerHTML > 25){
+        if (moves.innerHTML >20){
+            $('#myText').text(`In ${totalSecs} seconds, you did a total of ${moves.innerHTML} moves with Scores 0. Well done!`);
             $('#infoModalLabel').html('<h4> &#9785; &#9785 OOps , You Lose &#9785; &#9785; <h4>');
-            $('#myText').text(`In ${totalSecs} seconds, you did a total of ${moves.innerHTML} moves with ${$('.fa-star').length} Stars . Well done!`);
-                
             $('#myModal').modal('toggle');
         }
     }
     function rating(){
         if (moves.innerHTML > 7 && moves.innerHTML <= 10){
             uls[0].children[0].firstChild.className = "fa fa-star-o";
-        } else if ( moves.innerHTML > 10 && moves.innerHTML <=25) {
+        } else if ( moves.innerHTML > 10 && moves.innerHTML <=20) {
             uls[0].children[1].firstChild.className = "fa fa-star-o";
         }
         else  {
