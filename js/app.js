@@ -26,26 +26,26 @@ $(document).ready(function(){
     
     cards = ['diamond','diamond','paper-plane-o','paper-plane-o','anchor','anchor','bolt','bolt','cube','cube','leaf','leaf','bicycle','bicycle','bomb','bomb'];
     
-    function init () {
-    shuffle(cards);
-    $deck.empty();
-    // A for loop creates 16  <li> tags with the class of card for every <i> tag
-    // A class of fa fa- and a name of each object from the objects=[] array
-    for (let i = 0; i < cards.length; i++) {
-        $deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
-    }
-    
-    for (let i=0; i<=2 ;i++){
-     uls[0].children[i].firstChild.className = "fa fa-star";
-    }
+    window.init = function () {
+        shuffle(cards);
+        $deck.empty();
+        // A for loop creates 16  <li> tags with the class of card for every <i> tag
+        // A class of fa fa- and a name of each object from the objects=[] array
+        for (let i = 0; i < cards.length; i++) {
+            $deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
+        }
+        
+        for (let i=0; i<=2 ;i++){
+        uls[0].children[i].firstChild.className = "fa fa-star";
+        }
 
-    winMsg.style.display = 'none';
-    
-    clickHandler();
-    
-    var timer = setInterval(setTime, 1000);
-    window.clearInterval(timer);
-    reset();
+        winMsg.style.display = 'none';
+        
+        clickHandler();
+        
+        var timer = setInterval(setTime, 1000);
+        window.clearInterval(timer);
+        reset();
     }
 
 
@@ -71,7 +71,7 @@ $(document).ready(function(){
         totalSecs  = 0;
         counter = 0;
         moves.innerHTML = '0';
-        winMsg.style.display='none';
+        // winMsg.style.display='none';
     };
    
     restart.addEventListener('click', init);
